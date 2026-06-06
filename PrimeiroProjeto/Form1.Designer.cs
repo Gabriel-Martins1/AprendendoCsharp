@@ -55,10 +55,14 @@
             lblValorCalculado = new Label();
             btnRegistrarLocacao = new Button();
             dataGridView1 = new DataGridView();
+            label9 = new Label();
+            lstLocacoesParaDevolver = new ListBox();
+            button1 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudValorItem).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -129,6 +133,9 @@
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(button1);
+            tabPage4.Controls.Add(lstLocacoesParaDevolver);
+            tabPage4.Controls.Add(label9);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
@@ -322,6 +329,32 @@
             dataGridView1.Size = new Size(240, 150);
             dataGridView1.TabIndex = 10;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(159, 80);
+            label9.Name = "label9";
+            label9.Size = new Size(94, 15);
+            label9.TabIndex = 0;
+            label9.Text = "Locações Ativas:";
+            // 
+            // lstLocacoesParaDevolver
+            // 
+            lstLocacoesParaDevolver.FormattingEnabled = true;
+            lstLocacoesParaDevolver.Location = new Point(283, 47);
+            lstLocacoesParaDevolver.Name = "lstLocacoesParaDevolver";
+            lstLocacoesParaDevolver.Size = new Size(120, 94);
+            lstLocacoesParaDevolver.TabIndex = 1;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(244, 162);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 2;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -338,6 +371,8 @@
             tabPage2.PerformLayout();
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudValorItem).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -372,5 +407,8 @@
         private Label label8;
         private DataGridView dataGridView1;
         private Button btnRegistrarLocacao;
+        private Button button1;
+        private ListBox lstLocacoesParaDevolver;
+        private Label label9;
     }
 }
