@@ -44,10 +44,23 @@
             label4 = new Label();
             nudValorItem = new NumericUpDown();
             lstItens = new ListBox();
+            label5 = new Label();
+            cmbClientes = new ComboBox();
+            label6 = new Label();
+            cmbItens = new ComboBox();
+            label7 = new Label();
+            dtpRetirada = new DateTimePicker();
+            label8 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            lblValorCalculado = new Label();
+            btnRegistrarLocacao = new Button();
+            dataGridView1 = new DataGridView();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
+            tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudValorItem).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -95,6 +108,17 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(dataGridView1);
+            tabPage3.Controls.Add(btnRegistrarLocacao);
+            tabPage3.Controls.Add(lblValorCalculado);
+            tabPage3.Controls.Add(dateTimePicker1);
+            tabPage3.Controls.Add(label8);
+            tabPage3.Controls.Add(dtpRetirada);
+            tabPage3.Controls.Add(label7);
+            tabPage3.Controls.Add(cmbItens);
+            tabPage3.Controls.Add(label6);
+            tabPage3.Controls.Add(cmbClientes);
+            tabPage3.Controls.Add(label5);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -145,9 +169,9 @@
             // 
             // btnCadastrarCliente
             // 
-            btnCadastrarCliente.Location = new Point(293, 143);
+            btnCadastrarCliente.Location = new Point(197, 142);
             btnCadastrarCliente.Name = "btnCadastrarCliente";
-            btnCadastrarCliente.Size = new Size(100, 23);
+            btnCadastrarCliente.Size = new Size(196, 23);
             btnCadastrarCliente.TabIndex = 4;
             btnCadastrarCliente.Text = "Cadastrar";
             btnCadastrarCliente.UseVisualStyleBackColor = true;
@@ -187,7 +211,7 @@
             // 
             // nudValorItem
             // 
-            nudValorItem.Location = new Point(281, 128);
+            nudValorItem.Location = new Point(272, 128);
             nudValorItem.Name = "nudValorItem";
             nudValorItem.Size = new Size(120, 23);
             nudValorItem.TabIndex = 3;
@@ -198,8 +222,105 @@
             lstItens.FormattingEnabled = true;
             lstItens.Location = new Point(214, 175);
             lstItens.Name = "lstItens";
-            lstItens.Size = new Size(241, 94);
+            lstItens.Size = new Size(218, 94);
             lstItens.TabIndex = 4;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(182, 58);
+            label5.Name = "label5";
+            label5.Size = new Size(45, 15);
+            label5.TabIndex = 0;
+            label5.Text = "cliente:";
+            // 
+            // cmbClientes
+            // 
+            cmbClientes.FormattingEnabled = true;
+            cmbClientes.Location = new Point(260, 50);
+            cmbClientes.Name = "cmbClientes";
+            cmbClientes.Size = new Size(121, 23);
+            cmbClientes.TabIndex = 1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(193, 90);
+            label6.Name = "label6";
+            label6.Size = new Size(34, 15);
+            label6.TabIndex = 2;
+            label6.Text = "item:";
+            // 
+            // cmbItens
+            // 
+            cmbItens.FormattingEnabled = true;
+            cmbItens.Location = new Point(260, 82);
+            cmbItens.Name = "cmbItens";
+            cmbItens.Size = new Size(121, 23);
+            cmbItens.TabIndex = 3;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(131, 123);
+            label7.Name = "label7";
+            label7.Size = new Size(96, 15);
+            label7.TabIndex = 4;
+            label7.Text = "Data de Retirada:";
+            // 
+            // dtpRetirada
+            // 
+            dtpRetirada.Format = DateTimePickerFormat.Short;
+            dtpRetirada.Location = new Point(260, 117);
+            dtpRetirada.Name = "dtpRetirada";
+            dtpRetirada.Size = new Size(121, 23);
+            dtpRetirada.TabIndex = 5;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(74, 157);
+            label8.Name = "label8";
+            label8.Size = new Size(153, 15);
+            label8.TabIndex = 6;
+            label8.Text = "Data Prevista de Devolução:";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(260, 151);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(121, 23);
+            dateTimePicker1.TabIndex = 7;
+            // 
+            // lblValorCalculado
+            // 
+            lblValorCalculado.AutoSize = true;
+            lblValorCalculado.Location = new Point(176, 193);
+            lblValorCalculado.Name = "lblValorCalculado";
+            lblValorCalculado.Size = new Size(51, 15);
+            lblValorCalculado.TabIndex = 8;
+            lblValorCalculado.Text = "Valor: —";
+            // 
+            // btnRegistrarLocacao
+            // 
+            btnRegistrarLocacao.Location = new Point(260, 212);
+            btnRegistrarLocacao.Name = "btnRegistrarLocacao";
+            btnRegistrarLocacao.Size = new Size(121, 23);
+            btnRegistrarLocacao.TabIndex = 9;
+            btnRegistrarLocacao.Text = "Registrar Locação";
+            btnRegistrarLocacao.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(437, 58);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(240, 150);
+            dataGridView1.TabIndex = 10;
             // 
             // Form1
             // 
@@ -215,7 +336,10 @@
             tabPage1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudValorItem).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
@@ -237,5 +361,16 @@
         private NumericUpDown nudValorItem;
         private Label label4;
         private ListBox lstItens;
+        private Label label5;
+        private ComboBox cmbClientes;
+        private ComboBox cmbItens;
+        private Label label6;
+        private DateTimePicker dtpRetirada;
+        private Label label7;
+        private Label lblValorCalculado;
+        private DateTimePicker dateTimePicker1;
+        private Label label8;
+        private DataGridView dataGridView1;
+        private Button btnRegistrarLocacao;
     }
 }
