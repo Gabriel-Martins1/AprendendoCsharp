@@ -31,5 +31,25 @@ namespace PrimeiroProjeto
         {
 
         }
+
+        private void txtNomeCliente_TextChanged(object sender, EventArgs e)
+        {
+            a
+        }
+
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtContatoCliente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

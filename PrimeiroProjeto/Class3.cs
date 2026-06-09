@@ -8,7 +8,7 @@
         public DateTime DataRetirada { get; set; } 
         public DateTime DataPrevistaDevolucao { get; set; }
         public bool Devolvida { get; set; }       
-
+        
         public Locacao(int id, Cliente cliente, Item item, DateTime dataRetirada, DateTime dataPrevistaDevolucao)
         {
             Id = id;
