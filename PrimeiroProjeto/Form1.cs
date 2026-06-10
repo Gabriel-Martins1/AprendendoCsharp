@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Resources.ResXFileRef;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ControleLocacao
 {
@@ -18,7 +20,7 @@ namespace ControleLocacao
 
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent(); //monta todos os controles visuais na tela. nunca remover
         }
 
 
@@ -104,62 +106,73 @@ namespace ControleLocacao
             nudValorItem.Value = 0; // isso serve para limpar os campos de texto e o numeric up down após o cadastro do item
         }
 
-        private void AtualizarListaItens()
+        private void AtualizarListaItens() 
         {
             lstItens.Items.Clear();
-            foreach (Item i in itens)
-                lstItens.Items.Add(i);
+            foreach (Item i in itens) //para cada objeto Item dentro da lista de itens "i", é o nome temporário para cada item durante o loop
+                lstItens.Items.Add(i); //Items = a coleção de itens dentro da ListBox visual
+                                      //add adiciona um novo item visual na lista
+                                      //nesse caso o objeto "i" que é do tipo Item
         }
 
         private void AtualizarComboItens()
         {
-            cmbItens.Items.Clear();
-            foreach (Item i in itens)
-                cmbItens.Items.Add(i);
+            cmbItens.Items.Clear(); 
+            foreach (Item i in itens) //para cada objeto Item dentro da lista de itens, "i" é o nome temporário para cada item durante o loop
+                cmbItens.Items.Add(i); //Items = a coleção de itens dentro da combobox visual
+                                       //add adiciona um novo item visual na lista
+                                       //nesse caso o objeto "i" que é do tipo Item
         }
 
-        // ABA LOCAÇÕES
+        // ABA LOCAÇOES
 
         private void btnRegistrarLocacao_Click(object sender, EventArgs e)
         {
             if (cmbClientes.SelectedItem == null)
             {
-                MessageBox.Show("Selecione um cliente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                MessageBox.Show("Selecione um cliente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);  // isso serve para verificar se o usuário selecionou um cliente no combo box
+                return; // se não selecionou exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
             }
-            if (cmbItens.SelectedItem == null)
+            if (cmbItens.SelectedItem == null) // isso serve para verificar se o usuário selecionou um item no combo box
             {
                 MessageBox.Show("Selecione um item!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return; //MessageBoxIcon.Warning);   ícone de triângulo amarelo de aviso //MessageBoxButtons.OK para mostrar apenas o botão de ok
             }
 
-
+            //combobox guarda todos os itens como objetos
             Cliente clienteSelecionado = (Cliente)cmbClientes.SelectedItem;
-            Item itemSelecionado = (Item)cmbItens.SelectedItem;
+            // SelectedItem = o item que o usuário selecionou no dropdown
+            // (Cliente) = cast: converte o tipo genérico "object" para "Cliente"
+            Item itemSelecionado = (Item)cmbItens.SelectedItem; // mesmo processo para o item selecionado
 
             DateTime dataRetirada = dtpRetirada.Value.Date;
-            DateTime dataDevolucao = dtpDevolucao.Value.Date;
+            // .Value = pega a data selecionada no DateTimePicker
+            // .Date = remove a parte da hora (00:00:00), deixa só dia/mês/ano
+            // sem o .Date: 07/06/2026 00:00:00
+            // com o .Date:  07/06/2026
+
+            DateTime dataDevolucao = dtpDevolucao.Value.Date; // mesmo processo para a data de devolucao
 
             if (dataDevolucao <= dataRetirada) // se a data de devolução for menor ou igual a data de retirada exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
             {
                 MessageBox.Show("A data de devolução deve ser depois da data de retirada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; //MessageBoxIcon.Warning);   ícone de triângulo amarelo de aviso 
+                return; //MessageBoxIcon.Warning);   ícone de triângulo amarelo de aviso, mensageboxbuttons.ok para mostrar apenas o botão de ok
             }
 
-            if (!itemSelecionado.Disponivel)
+            if (!itemSelecionado.Disponivel) //se o item selecionado não estiver disponivel exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
             {
                 MessageBox.Show(
-                    $"O item '{itemSelecionado.Nome}' está indisponível no momento!",
-                    "Item Indisponível",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
+                    $"O item '{itemSelecionado.Nome}' está indisponível no momento!",  //aparece o nome do item que o usuário tentou alugar e a mensgaem
+                    "Item Indisponível", // título da mensagem
+                    MessageBoxButtons.OK, // mostra apenas o botão de ok
+                    MessageBoxIcon.Warning // ícone de triangulo amarelo de aviso
                 );
                 return;
             }
 
             Locacao novaLocacao = new Locacao(proximoIdLocacao, clienteSelecionado, itemSelecionado, dataRetirada, dataDevolucao);
-            proximoIdLocacao++;
-            locacoes.Add(novaLocacao);
+            proximoIdLocacao++; // + 1 no prox id, pra nao ficar igual
+            locacoes.Add(novaLocacao); //adiciona na lista da memoria
 
             AtualizarTabelaLocacoesAtivas();
             AtualizarListaParaDevolver();
@@ -172,57 +185,59 @@ namespace ControleLocacao
 
         private void AtualizarTabelaLocacoesAtivas()
         {
-            dgvLocacoesAtivas.Rows.Clear();
-            dgvLocacoesAtivas.Columns.Clear();
+            //datagridview é uma TABELA
+            dgvLocacoesAtivas.Rows.Clear(); //apaga as linhas da tabela 
+            dgvLocacoesAtivas.Columns.Clear(); // apaga todas as COLUNAS da tabela
 
-            dgvLocacoesAtivas.Columns.Add("Id", "ID"); 
-            dgvLocacoesAtivas.Columns.Add("Cliente", "Cliente");
+            dgvLocacoesAtivas.Columns.Add("Id", "ID"); // cria uma coluna nova
+            dgvLocacoesAtivas.Columns.Add("Cliente", "Cliente"); //nome interno, texto visual
             dgvLocacoesAtivas.Columns.Add("Item", "Item");
             dgvLocacoesAtivas.Columns.Add("Retirada", "Retirada");
             dgvLocacoesAtivas.Columns.Add("Devolucao", "Devolução Prevista");
             dgvLocacoesAtivas.Columns.Add("Dias", "Dias");
             dgvLocacoesAtivas.Columns.Add("Valor", "Valor Total");
 
-            var ativas = locacoes.Where(l => l.Devolvida == false).ToList();
+            List<Locacao> ativas = locacoes.Where(l => l.Devolvida == false).ToList(); //filtro pra pegar apenas locacoes ativas.
+                                                                                       // quando locacoes.devolvidas == false
+                                                                                       // .tolist() converte o resultado filtrado de volta para uma lista
 
-            foreach (Locacao loc in ativas)
+            foreach (Locacao loc in ativas) 
             {
                 dgvLocacoesAtivas.Rows.Add(  
-                    loc.Id,
-                    loc.Cliente.Nome,
-                    loc.Item.Nome,
-                    loc.DataRetirada.ToString("dd/MM/yyyy"),
-                    loc.DataPrevistaDevolucao.ToString("dd/MM/yyyy"),
-                    loc.CalcularDias(),
-                    $"R$ {loc.CalcularValorTotal():F2}"
+                    loc.Id,      //adiciona a coluna id
+                    loc.Cliente.Nome, // adiciona a coluna cliente
+                    loc.Item.Nome, // adiciona a coluna item
+                    loc.DataRetirada.ToString("dd/MM/yyyy"), // adiciona a data de retirada
+                    loc.DataPrevistaDevolucao.ToString("dd/MM/yyyy"), // adiciona a data devolução 
+                    loc.CalcularDias(), //a coluna de quantos dias 
+                    $"R$ {loc.CalcularValorTotal():F2}" //o valor 
                 );
             }
         }
 
         // ABA DEVOLUÇÕES
 
-        private void AtualizarListaParaDevolver()
+        private void AtualizarListaParaDevolver() // isso serve para atualizar a lista de locações ativas que ainda não foram devolvidas
         {
-            lstLocacoesParaDevolver.Items.Clear();
-            var ativas = locacoes.Where(l => l.Devolvida == false).ToList();
+            lstLocacoesParaDevolver.Items.Clear(); // limpa a lista visual para evitar duplicação
+            var ativas = locacoes.Where(l => l.Devolvida == false).ToList(); 
             foreach (Locacao loc in ativas)
                 lstLocacoesParaDevolver.Items.Add(loc);
         }
 
-        private void btnDevolver_Click(object sender, EventArgs e)
+        private void btnDevolver_Click(object sender, EventArgs e) // sender = referência do botão que foi clicado
         {
-            if (lstLocacoesParaDevolver.SelectedItem == null)
+            if (lstLocacoesParaDevolver.SelectedItem == null) // se nao houver nada selecionado na lista
             {
-                MessageBox.Show("Selecione uma locação para devolver!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecione uma locação para devolver!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning); 
                 return;
             }
 
-            Locacao locacaoSelecionada = (Locacao)lstLocacoesParaDevolver.SelectedItem;
-            locacaoSelecionada.Devolvida = true;
+            Locacao locacaoSelecionada = (Locacao)lstLocacoesParaDevolver.SelectedItem; //converte o objeto genérico "object" da ListBox para o tipo "Locacao"
+            locacaoSelecionada.Devolvida = true; //  marca a locação como devolvida
             locacaoSelecionada.Item.Devolver(); // marca o item como disponível novamente
             AtualizarListaItens();              // atualiza a lista
             AtualizarComboItens();              // atualiza o combo
-
             AtualizarListaParaDevolver(); // atualiza a lista de locações para devolver
             AtualizarTabelaLocacoesAtivas(); // atualiza a tabela de locações ativas para remover a que foi devolvida
 
