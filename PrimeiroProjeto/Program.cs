@@ -1,4 +1,4 @@
-namespace PrimeiroProjeto
+namespace ControleLocacao
 {
     internal static class Program
     {
