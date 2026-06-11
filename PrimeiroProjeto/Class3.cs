@@ -29,19 +29,20 @@
 
             return (DataPrevistaDevolucao - DataRetirada).Days;
         } //DataPrevistaDevolucao - DataRetirada retorna um TimeSpan que representa a diferença entre as duas datas e a propriedade Days retorna o número total de dias dessa diferença
-
+            //o que é um timespan? é um tipo de dado que representa um intervalo de tempo
+            //ele tem propriedades como Days, hours, sinutes, seconds
         public decimal CalcularValorTotal()
         {
-            return CalcularDias() * Item.ValorPorDia;
+            return CalcularDias() * Item.ValorPorDia; //como nao tem nenhuma variavel pra puxar o valor pra fora, se usa o metodo inteiro .calculardias()
         } //calcula o valor total da locacao multiplicando a quantidade de dias pela valor por dia do item usando a função CalcularDias() e a propriedade ValorPorDia do item
 
         public override string ToString()
         { //Sem o override fica "ControleLocacao.Locacao" na lista
-            //com o override ele mostra o id da locacao, o nome do cliente, o nome do item, as datas de retirada e devolucao, a quantidade de dias e o valor total da locacao
-            return $"[{Id}] {Cliente.Nome} | {Item.Nome} | " +
-                   $"{DataRetirada:dd/MM/yyyy} → {DataPrevistaDevolucao:dd/MM/yyyy} | " +
-                   $"{CalcularDias()} dias | R$ {CalcularValorTotal():F2}";
-        } //o f2 formata o valor para arredondar. 10.50 vira 10.5
-          //DataRetirada:dd/MM/yyyy formata a data de retirada para o formato dia/mês/ano e DataPrevistaDevolucao:dd/MM/yyyy formata a data prevista de devolucao para o mesmo formato
-    }     // padrao americano pro pradrao br
+            //com o override ele mostra o id da locacao, o nome do cliente, o nome do item  as datas de retirada e devolucao, a quantidade de dias e o valor total da locacao
+            return $"[{Id}] {Cliente.Nome}.  {Item.Nome}  " + //como o texto do return ficou muito grande eu quebrei ele em duas linhas usando o operador de concatenacao + para juntar as duas partes do texto
+                   $"{DataRetirada:dd/MM/yyyy}.  {DataPrevistaDevolucao:dd/MM/yyyy} | " + //o + basicamente junta os textos das linhas 
+                   $"{CalcularDias()} dias. R$ {CalcularValorTotal():F2}";
+        } //o f2 formata o valor para 2 casas decimais. 10.5 vira 10.50... 10  vira 10.00
+          //DataRetirada:dd/MM/yyyy formata a data de retirada para o formato dia/mes/ano e DataPrevistaDevolucao:dd/MM/yyyy formata a data prevista de devolucao para o mesmo formato
+    }     // padrao americano pro pradrao brasileiro
 }

@@ -14,7 +14,7 @@ namespace ControleLocacao
         private List<Item> itens = new List<Item>();
         private List<Locacao> locacoes = new List<Locacao>();
 
-        private int proximoIdCliente = 1;   // essas variáveis servem para gerar IDs únicos para cada cliente, item e locação, começando do 1 e incrementando a cada novo cadastro
+        private int proximoIdCliente = 1;   // essas variáveis servem para gerar IDs únicos para cada cliente, item e locao, começando do 1 e incrementando a cada novo cadastro
         private int proximoIdItem = 1;
         private int proximoIdLocacao = 1;
 
@@ -42,6 +42,9 @@ namespace ControleLocacao
 
             Cliente novoCliente = new Cliente(proximoIdCliente, nome, contato); // isso serve para criar um novo cliente usando a classe Cliente e passando o próximo ID
                                                                                 // nome e contato como parâmetros para o construtor da classe Cliente
+                                                                                //o proximoIDCliente vira o ID do cliente pq é a primeira coisa passada na class cliente
+                                                                                //csharp identifica pela ordem dos parâmetros
+             //se eu criar uma variavel LIXO = 1 e colocar no lugar do proxidcliente vai dar certo pq é um inteiro e tá a class espera um inteiro e está na ordem do parametro
             proximoIdCliente++; // incrementa o contador para o próximo cliente ter um ID diferente
             clientes.Add(novoCliente); // adiciona o objeto criado na lista em memória
 
@@ -80,8 +83,8 @@ namespace ControleLocacao
                                                                         // Eventargs : Contém os dados ou informações específicas sobre o evento em si
         {
             string nome = txtNomeItem.Text.Trim(); //trim() serve para remover os espaços em branco no início e no final do texto
-            decimal valor = nudValorItem.Value; //.value serve para pegar o valor do numeric up down
-   
+            decimal valor = nudValorItem.Value; //.value serve para pegar o valor do numeric up down, que é do tipo decimal
+
 
             if (nome == "") // isso serve para verificar se o nome do item esta vazio
                             // se estiver exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
@@ -96,6 +99,8 @@ namespace ControleLocacao
             }
 
             Item novoItem = new Item(proximoIdItem, nome, valor); //criando um novo item usando a classe Item
+                                                                  //peoximoIDitem vira o ID do item pq é a primeira coisa passada na class item
+                                                                  //(csharp identifica pela ordem dos parametros)
             proximoIdItem++; //pega o id e soma 1 para o próximo item ter um ID diferente
             itens.Add(novoItem); //adiciona o objeto criado na lista em memória (lista la em cima,   private List<Item> itens = new List<Item>();)
 
@@ -128,7 +133,8 @@ namespace ControleLocacao
 
         private void btnRegistrarLocacao_Click(object sender, EventArgs e)
         {
-            if (cmbClientes.SelectedItem == null)
+            if (cmbClientes.SelectedItem == null) //SelectedItem é uma propriedade nativa do ComboBox que retorna o item atualmente selecionado pelo usuário
+                                                  //se nao há nada selecionado, ele aparece a mensagem de aviso
             {
                 MessageBox.Show("Selecione um cliente!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);  // isso serve para verificar se o usuário selecionou um cliente no combo box
                 return; // se não selecionou exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
@@ -139,19 +145,25 @@ namespace ControleLocacao
                 return; //MessageBoxIcon.Warning);   ícone de triângulo amarelo de aviso //MessageBoxButtons.OK para mostrar apenas o botão de ok
             }
 
-            //combobox guarda todos os itens como objetos
+            
             Cliente clienteSelecionado = (Cliente)cmbClientes.SelectedItem;
+            //combobox guarda todos os itens como objetos GENERICOS
             // SelectedItem = o item que o usuário selecionou no dropdown
-            // (Cliente) = cast: converte o tipo genérico "object" para "Cliente"
-            Item itemSelecionado = (Item)cmbItens.SelectedItem; // mesmo processo para o item selecionado
+            // (Cliente) = converte o tipo genérico "object" para um objeto da class cliente "Cliente"
+
+         
+            Item itemSelecionado = (Item)cmbItens.SelectedItem;
+            //combobox guarda todos os itens como objetos GENERICOS
+            //SelectedItem é o item que o usuario selecionou 
+            // (Item) converte o tipo genérico "object" para um objeto da class item "Item"
 
             DateTime dataRetirada = dtpRetirada.Value.Date;
-            // .Value = pega a data selecionada no DateTimePicker
-            // .Date = remove a parte da hora (00:00:00), deixa só dia/mês/ano
+            // .Value = pega a data selecionada no DateTimePicker (literalmente a data que o usuário escolheu)
+            // .Date = remove as HORAS e deixa APENAS o dia    
             // sem o .Date: 07/06/2026 00:00:00
             // com o .Date:  07/06/2026
 
-            DateTime dataDevolucao = dtpDevolucao.Value.Date; // mesmo processo para a data de devolucao
+            DateTime dataDevolucao = dtpDevolucao.Value.Date; // mesmo processo para a data de devolucao'
 
             if (dataDevolucao <= dataRetirada) // se a data de devolução for menor ou igual a data de retirada exibe uma mensagem de aviso e retorna para nao continuar com o cadastro
             {
@@ -248,7 +260,7 @@ namespace ControleLocacao
 
 
 
-        // MÉTODOS GERADOS PELO DESIGNER — não apagar
+        // MÉTODOS GERADOS PELO DESIGNER  
 
         private void button1_Click(object sender, EventArgs e) { }
         private void devolucoes_Click(object sender, EventArgs e) { }
