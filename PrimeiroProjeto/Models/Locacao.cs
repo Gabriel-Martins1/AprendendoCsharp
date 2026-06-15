@@ -1,4 +1,4 @@
-﻿namespace ControleLocacao
+﻿namespace ControleLocacao.Models
 {
     public class Locacao
     { //class locacao é o modelo
